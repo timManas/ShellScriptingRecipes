@@ -1,0 +1,229 @@
+
+
+Bash Programming Recipes
+
+#!/bin/bash - This should be first line of any script
+
+varname=value - Create a variable called "varname" and assign it value. ABSOLUTE NO SPACES ALLOWED
+
+export varname=vale - If you want the variale to exist globally. Otherwise, the variable gets stored only in the current session
+
+
+echo $varname = Output on screen the value of varname
+
+printenv - Prints all the variables on screen
+
+chmod +x filename - Make bash script executable
+
+
+Basics
+touch <filename>              # creates or updates your file
+cat > <filename>              # places standard input into file
+more <filename>               # shows the first part of a file (move with space and type q to quit)
+head <filename>               # outputs the first 10 lines of file
+tail <filename>               # outputs the last 10 lines of file (useful with -f option)
+emacs <filename>              # lets you create and edit a file
+mv <filename1> <filename2>    # moves a file
+cp <filename1> <filename2>    # copies a file
+rm <filename>                 # removes a file
+diff <filename1> <filename2>  # compares files, and shows where they differ
+wc <filename>                 # tells you how many lines, words and characters there are in a file
+chmod -options <filename>     # lets you change the read, write, and execute permissions on your files
+gzip <filename>               # compresses files
+gunzip <filename>             # uncompresses files compressed by gzip
+gzcat <filename>              # lets you look at gzipped file without actually having to gunzip it
+lpr <filename>                # print the file
+lpq                           # check out the printer queue
+lprm <jobnumber>              # remove something from the printer queue
+genscript                     # converts plain text files into postscript for printing and gives you some options for formatting
+dvips <filename>              # print .dvi files (i.e. files produced by LaTeX)
+grep <pattern> <filenames>    # looks for the string in the files
+grep -r <pattern> <dir>       # search recursively for pattern in directory
+
+
+How to create an array
+array[0]=val0	
+array[1]=va?l1
+array[2]=val2
+array(valA valB valC)
+
+How to display elements on array
+${array[i]}                  # displays array's value for this index. If no index is supplied, array element 0 is assumed
+${#array[i]}                 # to find out the length of any element in the array
+${#array[@]}                 # to find out how many values there are in the array
+
+
+Numeric Comparisons
+int1 -eq int2	Returns True if int1 is equal to int2.
+int1 -ge int2	Returns True if int1 is greater than or equal to int2.
+int1 -gt int2	Returns True if int1 is greater than int2.
+int1 -le int2	Returns True if int1 is less than or equal to int2
+int1 -lt int2	Returns True if int1 is less than int2
+int1 -ne int2	Returns True if int1 is not equal to int2
+
+
+String Comparisons
+str1 = str2	Returns True if str1 is identical to str2.
+str1 != str2	Returns True if str1 is not identical to str2.
+str	Returns True if str is not null.
+-n str	Returns True if the length of str is greater than zero.
+-z str	Returns True if the length of str is equal to zero. (zero is different than null)
+
+File Comparisons
+-d filename	Returns True if file, filename is a directory.
+-f filename	Returns True if file, filename is an ordinary file.
+-r filename	Returns True if file, filename can be read by the process.
+-s filename	Returns True if file, filename has a nonzero length.
+-w filename	Returns True if file, filename can be written by the process.
+-x filename	Returns True if file, filename is executable.
+
+Expression Comparison
+expr1 -a expr2 - Returns true if expression are true (i.e "&&",and)
+expr1 -o expr2 - Returns true if expre1 or expre2 is true (i.r "||", or)
+!expr1 = returns true if expr1 is false
+
+
+
+
+Logic Comparison
+
+- If Loop
+ex.
+if [expression]
+then
+Stuff happens here
+fi	
+
+
+- If Then Else Loop
+ex. 
+if [expression]
+then
+Stuff happens here for if statement
+else
+Stuff happens here which is false
+fi
+
+- If Then Else If Then Else Loop
+ex. 
+if [expression]
+then
+commands
+elif [expression2]
+then 
+commands
+else
+commands
+fi
+
+
+Iterations loops
+
+- For Loop
+for var1 in list
+do 
+commands
+done
+
+
+
+- While Loop
+while [expression]
+do 
+commands
+done
+
+- Until Loop
+while [expression]
+do
+commands
+done
+
+
+Functions
+
+- Create a function
+
+fname(args1, args,) {
+commands
+}
+
+
+- Create a function that accepts arguments
+
+fname() {
+commands
+}
+
+
+- Standard Unix Streams
+stdin - This is known as Standard Input. File descritor is 0. The program will write all output as STDIN
+stdout - This is known as Standard Output. File descriptor is 1. The program will write all output as STDOUT
+stderr - This is known as Standard Error. File descriptor is 2. The program will write all error as STDERR 
+
+
+- Grep
+Stands for "Globally search for regular expression and print all all lines containing it"
+grep <pattern> <filenames>    # looks for the string in the files
+grep -r <pattern> <dir>       # search recursively for pattern in directory
+
+Grep can have several options included
+-v : Print all lines that DO NOT  match pattern
+-n : Print all match lines and its line number
+-l : Print only the names of the files with matching lines
+-c : Prints only the count of matching lines 
+-i : Matches either upper or lower case
+
+ex. ls -l | grep -i "carol.*aug"    - This tells grep to find line with carol followeed by 0 or any other character in regex (".*"), then followed by aug. Also the -i is for either upper or lower case. Since file is not provided, then it searches the entire current folder 
+
+
+
+
+- How to list processes currently running ? 
+ps -f (full option)
+
+
+- How to kill a process ? 
+1. Get the process ID (PID)
+2. kill PID#
+ex. If 4433 is the PID, then the command is  "kill 4433"
+
+
+
+
+- Top command
+Command "top"
+- Show processes sorted by various criteria
+
+
+
+- Ping command
+Command "ping hostname or ip-address"
+- Sends an echo request to a host on the network
+
+
+
+- File Transfer Protocol (ftp)
+Helps you upload and download your file from one computer to another
+ex. ftp hostname or ip-address
+
+Once logged in you can access the home directory and perform various commands
+put filename - Uploads file from local to remote machine
+get filename - Downloads file from remote machine to local
+mput file list - Uploads multiple files from local to remote 
+mget file list - Downloads multiple files from remote to local
+dir - list all files available in the current directory
+quit - logouts and quits ftp
+
+
+* Note - All files uploaded and downloaded occur from the current directory
+
+
+- Telnet command
+Required when we want to work on a unix machine remotely
+command "telnet hostname or ip-address"
+
+
+
+
+
