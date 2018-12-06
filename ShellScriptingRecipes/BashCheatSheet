@@ -225,5 +225,54 @@ command "telnet hostname or ip-address"
 
 
 
+- How to make a script Executable ? 
+Once you create a script, you will notice you cant run it. 
+You need to use chmod to allow the script to be executable
+Use "chmod +x filename"
+
+
+- Why do we need to include "#!/bin.sh"  everytime we start a new script ?
+This is to tell the system that a shell script (sh) is being started.
+Note there a many types of Shells 
+Bourne Shell - The "$" is the default prompt
+C Shell - The "%" is the default prompt 
+
+
+
+
+- Variables 
+By Convention, all variables need to be in all CAPs and can either be numbers or letters
+
+You can access variables by using the "$" symbol
+ex "$PERSON"
+
+You can also make a variable read only by using the "readonly" keyword
+ex. 
+NAME="Tim"
+readonly NAME
+NAME="James"
+
+If you execute this code, you will get the following message "/bin/sh: NAME: This variable is read only"
+
+- How to delete the value from a variable  (DELETING)?
+Use the "unset" keyword
+Ex. unset NAME
+Once deleted though, you cannot access the stored value anymore 
+
+
+- Special Variables
+$$ (Only one $) - used to represent the PID of the current shell
+$0 - Filename of the current script
+$n - Where n can be any positive number. Think of this as the argument # which invoked the script. Similar to args[] in java
+$# - Displays the number of arguments
+$? - Displays the exit status of the last command. 0 for successful, 1 for failed 
+$* - Access all the parameters
+
+
+
+
+
+
+
 
 
