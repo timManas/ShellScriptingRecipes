@@ -271,8 +271,150 @@ $* - Access all the parameters
 
 
 
+- Arrays
+arrayName=(value1 value2 ... valuen) - Initialize an array
+${arrayName[index#]} - Access elements in an array. Starts from 0. ALSO DO NOT FORGET THE {} 
+${arrayName[*]} OR ${arrayName[@]} - Access all items inside the array
 
 
 
 
+- Arithmetic Operators
+Accepts + - * / % = ==  != 
+Note: All conditional operators like == or != need to be inside SQUARE BRACKETS and has SPACES AROUND THEM
+ex. [ $a == $b ] will return false
+ex. `expr $a + b' or `expr $a + 10' ... NOTE we are using a ` an NOT a ' ... BIG DIFFERENCE
+
+
+
+- Relational Operators
+Accepts -eq -ne -gt -lt  -ge -le
+These operators DO NOT work on String values unless values are numeric
+Note: All Relational operatos need to be inside SQUARE BRACKETS 
+ex. [ $a <= $b ] 
+
+- Boolean Operators
+Accepts ! -o(logical Or)  -a(logical And)
+Ex. if a=10, b=20
+[ ! false ] will return true
+[ $a -lt 20  -o $b -gt 100 ] is true
+
+- String Operators
+Accepts = !-  -z(Returns True if String size is 0, other false) -n(Returns true if String is non zero) str(Checks if String is a string)
+
+
+
+- File Test Operators
+-d filename     Returns True if file, filename is a directory.
+-f filename     Returns True if file, filename is an ordinary file.
+-r filename     Returns True if file is readable or can be read by the process.
+-s filename     Returns True if file, filename has a nonzero length.
+-w filename     Returns True if file, filename can be written by the process.
+-x filename     Returns True if file, filename is executable.
+-b filename 	Returns True if file is block special file
+-c filename 	Returns True if file is special chaeacter file
+-e filename 	Returns True if file exists even if file is a directory
+
+
+- IF/ELSE Statements
+Bash supports
+if ....fi 
+if ... else ...fi
+if ... elif ... else ...fi
+
+
+
+- While Loops
+format: 
+while condition1
+do
+...
+..
+.
+done
+
+
+
+
+- Break Loops
+You can use the "break" command to break a look
+
+
+
+- Continue 
+Instead of breaking, you can continue on without breaking the loop using the command "continue"
+
+
+- Special Characters
+The following characters need to have "\" in place 
+* ? [ ] ' " \ $ ; & ( ) | ^ < > new-line space tab
+ex. \; or \n
+
+The "$" character needs to have the entire string quoted 
+ex. echo "I have \$10" which should output "I have $10"
+
+Single Quotes '' - All special characters between those quotes lose their special meaning
+Ex. Say we want to display: echo <-$1500.**>; (update?) [y|n]
+Itd be bitch to put a back slash around every single one like this echo \<-\$1500.\*\*\>\; \(update\?\) \[y\|n\]
+In this case, we just use a single quote 
+echo '<-$1500.**>; (update?) [y|n]'
+
+
+Double Quotes "" - All special characters looks their special meaning with the execption of $ `  \$  \' \" \\ 
+Ex. Say we want to display a str with special characters like:
+echo '$VAR owes <-$1500.**>; [ as of (`date +%m/%d`) ]'
+
+If we execute this, we actually get: $VAR owes <-$1500.**>; [ as of (`date +%m/%d`) ]
+But we want to get this -> ZARA owes <-$1500.**>; [ as of (07/02) ]
+
+So we place a double quote 
+VAR=ZARA
+echo "$VAR owes <-\$1500.**>; [ as of (`date +%m/%d`) ]"
+
+
+***REMEMBER: Single qupte ALL characters lose their meaning while double quotes lose a select few as mentioned above"
+
+Back Slash - Any Character immediately following a back slash loses its special meaning
+
+
+Back Quotes - Putting any Shell command in back quotes `` EXECUTES A COMMAND
+
+
+
+
+- Output Redirection
+Output normally goes back to your terminal (i.e Screen), but we can tell the terminal to output the results onto a file instead
+Ex: Type in who 
+Now Type in who > usersList
+
+You can use >> to append to that file 
+
+
+- Input Redirection
+Input can also redirected elsewhere 
+Ex. wc -l usersList.txt would return "6 usersList.txt"
+Now wc -l < usersList.txt would return "6" 
+
+
+Whats the difference ? The first case, the name of the file users is listed with the line count, in the second it is not. 
+Also, in the first case wc knows its reading the input from the file users while in the second case it is reading from standard input
+
+
+- Discard the output 
+Ex: commaand > /dev/null
+Note: /dev/null is a special file which automatically discards its input
+
+To discard both input and output use this command:
+command > /dev/null 2>&1
+
+
+- Functions
+Format: 
+function_name() {
+ list of commands
+}
+
+
+You can Pass parameters to a function by simplying this function_name Hello Tim
+You can access the parameters to a function by using $1 $2 ...$n and so forth
 
